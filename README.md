@@ -14,7 +14,7 @@ Date: 2019-06-29
 #to run the sim
 ```
 git clone https://github.com/carmen19882410/TC.git
-cd Thalamic_neuron_model/mod
+cd TC/mod
 nrnivmodl 
 cd ..
 ln -s "mod/x86_64" x86_64
