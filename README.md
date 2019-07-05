@@ -13,7 +13,7 @@ Date: 2019-06-29
 
 #to run the sim
 ```
-git clone https://github.com/carmen19882410/Thalamic_neuron_model.git
+git clone https://github.com/carmen19882410/TC.git
 cd Thalamic_neuron_model/mod
 nrnivmodl 
 cd ..
