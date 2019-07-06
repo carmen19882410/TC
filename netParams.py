@@ -52,8 +52,12 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 netParams.stimSourceParams['CB_syn'] = {'type': 'AlphaSynapse', 'onset': 'uniform(300,600)', 'tau': 5, 'gmax': 'post_ynorm', 'e': 0}
 netParams.stimTargetParams['CB_syn->TC'] = {'source': 'CB_syn', 'sec':'soma', 'loc': 0.5, 'conds': {'pop':'TC'}}
 
-netParams.stimSourceParams['pulse'] = {'type': 'IClamp', 'del':200, 'dur':10, 'amp':0.4} #ms  nA
-netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
+netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':10, 'amp':0.4} #ms  nA
+netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
+
+netParams.stimSourceParams['pulse_CN'] = {'type': 'IClamp', 'del':50, 'dur':10, 'amp':0.4} #ms  nA
+netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+
 
 
 
@@ -75,7 +79,7 @@ netParams.connParams['CN->TC'] = { 	#  S -> M label
 	'postConds': {'pop': 'TC'}, # conditions of postsyn cells
 	'probability': 1, 			# probability of connection
 	'weight': cfg.connWeight, 		# synaptic weight
-	'delay': 5,						# transmission delay (ms)
+	'delay': 0,						# transmission delay (ms)
 	'synMech': 'exc'}   			# synaptic mechanism
 
 

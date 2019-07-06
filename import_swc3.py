@@ -29,10 +29,16 @@ if platform.system() == 'Windows':
 myCell= morphology.Cell()
 morphology.load(filename=os.path.join(wdir,'SWC', 'MN_morphology.swc'), cell=myCell)
 
+
+#h.read.neuron.swc('SWC/MN_morphology.swc')
+#read.ngraph.swc('SWC/MN_morphology.swc', weights = FALSE, directed = TRUE)
+
+
+
 #plot loaded cell
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-morphology.shapeplot(h, ax)
+#fig = plt.figure()
+#ax = plt.axes(projection='3d')
+#morphology.shapeplot(h, ax)
            
 #get the sections from the cell
 secs=list(h.allsec());
