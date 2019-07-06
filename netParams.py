@@ -55,7 +55,7 @@ netParams.stimTargetParams['CB_syn->TC'] = {'source': 'CB_syn', 'sec':'soma', 'l
 netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':10, 'amp':0.4} #ms  nA
 netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
 
-netParams.stimSourceParams['pulse_CN'] = {'type': 'IClamp', 'del':50, 'dur':10, 'amp':0.4} #ms  nA
+netParams.stimSourceParams['pulse_CN'] = {'type': 'IClamp', 'del':50, 'dur':10, 'amp':2} #ms  nA
 netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 
 
