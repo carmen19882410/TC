@@ -85,7 +85,7 @@ class TC_cell():
     def add_biophys_soma(self):       
         for sec in soma:
             sec.insert('hh')
-            #sec.insert('na')
+            sec.insert('na')
             #sec.insert('kv')
             
     

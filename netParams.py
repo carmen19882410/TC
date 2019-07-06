@@ -18,6 +18,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.popParams['M'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 
 netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 1, 'cellModel': 'HH'}
+netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
 #netParams.popParams['CA_229hoc'] = {'cellType': 'DET', 'numCells': 1, 'cellModel': 'blank'}
@@ -46,17 +47,20 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 # Stimulation parameters
 ################################################################################################
     
-#netParams.stimSourceParams['bkg'] = {'type': 'NetStim', 'rate': 10, 'noise': 0.5}#intrinsic noise is also included
-#netParams.stimTargetParams['bkg->PYR'] = {'source': 'bkg', 'conds': {'cellType': 'PYR'}, 'weight': 0.01, 'delay': 5, 'synMech': 'exc'}
 
-netParams.stimSourceParams['CB_syn'] = {'type': 'AlphaSynapse', 'onset': 'uniform(300,600)', 'tau': 5, 'gmax': 'post_ynorm', 'e': 0}
-netParams.stimTargetParams['CB_syn->TC'] = {'source': 'CB_syn', 'sec':'soma', 'loc': 0.5, 'conds': {'pop':'TC'}}
+#netParams.stimSourceParams['CB_syn'] = {'type': 'AlphaSynapse', 'onset': 'uniform(300,600)', 'tau': 5, 'gmax': 'post_ynorm', 'e': 0}
+#netParams.stimTargetParams['CB_syn->TC'] = {'source': 'CB_syn', 'sec':'soma', 'loc': 0.5, 'conds': {'pop':'TC'}}
 
-netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':10, 'amp':0.4} #ms  nA
-netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
+#netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':10, 'amp':0.4} #ms  nA
+#netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
 
-netParams.stimSourceParams['pulse_CN'] = {'type': 'IClamp', 'del':50, 'dur':10, 'amp':2} #ms  nA
-netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+#netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':50, 'dur':10, 'amp':2} #ms  nA
+#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+
+netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'rate': 150, 'noise': 10}
+#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+netParams.stimTargetParams['pulse_CN->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'weight': 0.001, 'delay': 100, 'synMech': 'exc'}
+#netParams.stimSourceParams['Input_4'] = {'type': 'NetStim', 'interval': 'uniform(20,100)', 'number': 1000, 'start': 600, 'noise': 0.1}
 
 
 
@@ -80,7 +84,11 @@ netParams.connParams['CN->TC'] = { 	#  S -> M label
 	'probability': 1, 			# probability of connection
 	'weight': cfg.connWeight, 		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
-	'synMech': 'exc'}   			# synaptic mechanism
+	'synMech': 'exc',                   #synaptic mechanism
+    'loc': [0.4, 0.7],                   #location of synapses that make a connection
+    'synsPerConn': 10}                  #number of synapses
+
+    
 
 
 

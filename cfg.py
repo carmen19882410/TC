@@ -3,7 +3,7 @@ from netpyne import specs
 # Simulation options
 cfg = specs.SimConfig()		# object of class SimConfig to store simulation configuration
 
-cfg.duration = 500 			# Duration of the simulation, in ms
+cfg.duration = 2000 			# Duration of the simulation, in ms
 cfg.dt = 0.025 				# Internal integration timestep to use
 cfg.verbose = True  			# Show detailed messages
 cfg.recordStim = True
