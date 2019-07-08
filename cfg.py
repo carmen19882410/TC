@@ -9,9 +9,13 @@ cfg.verbose = True  			# Show detailed messages
 cfg.recordStim = True
 #cfg.recordCells = ['TC']
 cfg.recordTraces = {'V_soma':{'sec':'soma_0', 'loc': 0.5, 'var':'v'}}  # Dict with traces to record
-cfg.recordTraces['ica'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'itGHK', 'var': 'ica'}
 cfg.recordTraces['ina'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ina'}
 cfg.recordTraces['ik'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ik'}
+cfg.recordTraces['gna'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'gna'}
+cfg.recordTraces['gk'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'gk'}
+cfg.recordTraces['ica'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'itGHK', 'var': 'ica'}
+cfg.recordTraces['cai'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'itGHK', 'var': 'cai'}
+cfg.recordTraces['cai'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'cad_cs', 'var': 'cai'}
 
 cfg.recordStep = 0.1 			# Step size in ms to save data (eg. V traces, LFP, etc)
 cfg.filename = 'Carmen_mod_swc'  # Set file output name
