@@ -17,7 +17,7 @@ NEURON {
 	SUFFIX hh2
 	USEION na READ ena WRITE ina
 	USEION k READ ek WRITE ik
-	RANGE gnabar, gkbar, vtraub
+	RANGE gnabar, gkbar, vtraub,ina, ik, gna, gk
 	RANGE m_inf, h_inf, n_inf
 	RANGE tau_m, tau_h, tau_n
 	RANGE m_exp, h_exp, n_exp
@@ -59,6 +59,8 @@ ASSIGNED {
 	h_exp
 	n_exp
 	tadj
+	gna
+	gk
 }
 
 
@@ -66,6 +68,9 @@ BREAKPOINT {
 	SOLVE states
 	ina = gnabar * m*m*m*h * (v - ena)
 	ik  = gkbar * n*n*n*n * (v - ek)
+	gna = gnabar * m*m*m*h
+	gk  = gkbar * n*n*n*n
+	
 }
 
 

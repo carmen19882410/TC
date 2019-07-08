@@ -8,9 +8,10 @@ cfg.dt = 0.025 				# Internal integration timestep to use
 cfg.verbose = True  			# Show detailed messages
 cfg.recordStim = True
 #cfg.recordCells = ['TC']
-cfg.recordTraces = {'V_soma':{'sec':'soma_0', 'loc': 0.5, 'var':'v'}, 'ina':{'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var':'ina'}}  # Dict with traces to record
+cfg.recordTraces = {'V_soma':{'sec':'soma_0', 'loc': 0.5, 'var':'v'}}  # Dict with traces to record
 cfg.recordTraces['ica'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'itGHK', 'var': 'ica'}
 cfg.recordTraces['ina'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ina'}
+cfg.recordTraces['ik'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ik'}
 
 cfg.recordStep = 0.1 			# Step size in ms to save data (eg. V traces, LFP, etc)
 cfg.filename = 'Carmen_mod_swc'  # Set file output name

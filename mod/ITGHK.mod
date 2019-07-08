@@ -29,7 +29,7 @@ INDEPENDENT {t FROM 0 TO 1 WITH 1 (ms)}
 NEURON {
 	SUFFIX itGHK
 	USEION ca READ cai,cao WRITE ica
-	RANGE pcabar, m_inf, tau_m, h_inf, tau_h, shift, actshift
+	RANGE pcabar, m_inf, tau_m, h_inf, tau_h, shift, actshift, ica
 	GLOBAL qm, qh
 }
 
@@ -51,8 +51,8 @@ PARAMETER {
 	actshift = 0 	(mV)	: shift of activation curve (towards hyperpol)
 	cai	= 2.4e-4 (mM)	: adjusted for eca=120 mV
 	cao	= 2	(mM)
-	qm	= 5		: q10's for activation and inactivation
-	qh	= 3		: from Coulter et al., J Physiol 414: 587, 1989
+	qm	= 2.5		: q10s for activation and inactivation
+	qh	= 2.5		: from Coulter et al., J Physiol 414: 587, 1989
 }
 
 STATE {

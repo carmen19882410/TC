@@ -108,12 +108,12 @@ class TC_cell():
             #sec.qh_itGHK = 2.5     ##check why this doesnt work!!!!!!!!!!!!!!
 
             #insert calcium diffusion
-            sec.insert('cad')		# calcium diffusion everywhere
-            sec.depth_cad = 0.1 * corrD
-            sec.kt_cad = 0		# no pump
-            sec.kd_cad = 1e-4
-            sec.taur_cad = 5
-            sec.cainf_cad = 2.4e-4	
+            sec.insert('cad_cs')		# calcium diffusion everywhere
+            sec.depth_cad_cs = 0.1 * corrD
+            sec.kt_cad_cs = 0		# no pump
+            sec.kd_cad_cs = 1e-4
+            sec.taur_cad_cs = 5
+            sec.cainf_cad_cs = 2.4e-4	
 	
 	
 
