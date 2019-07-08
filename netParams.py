@@ -17,7 +17,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.popParams['S'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 #netParams.popParams['M'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 
-netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 1, 'cellModel': 'HH'}
+netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 10, 'cellModel': 'HH'}
 netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 

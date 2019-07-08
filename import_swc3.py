@@ -27,18 +27,25 @@ if platform.system() == 'Windows':
 #load cell as mycell
 #    def getmorph(self):
 myCell= morphology.Cell()
-morphology.load(filename=os.path.join(wdir,'SWC', 'MN_morphology.swc'), cell=myCell)
+morphology.load(filename=os.path.join(wdir,'SWC', 'AA_0266.swc'), cell=myCell)
+
+#h.load_file('import3d.hoc')
+#myCell = h.Import3d_SWC_read()
+#myCell.input('SWC/AA_0266.swc')
+#i3d = h.Import3d_GUI(myCell, 0)
+#i3d.instantiate(None)
 
 
-#h.read.neuron.swc('SWC/MN_morphology.swc')
+#import neuron as h
+#myCell = h.read.swc('SWC/MN_morphology.swc')
 #read.ngraph.swc('SWC/MN_morphology.swc', weights = FALSE, directed = TRUE)
 
 
 
 #plot loaded cell
-#fig = plt.figure()
-#ax = plt.axes(projection='3d')
-#morphology.shapeplot(h, ax)
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+morphology.shapeplot(h, ax)
            
 #get the sections from the cell
 secs=list(h.allsec());

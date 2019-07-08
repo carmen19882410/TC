@@ -14,7 +14,7 @@ cfg.filename = 'Carmen_mod_swc'  # Set file output name
 cfg.saveJson = True 	
 cfg.printPopAvgRates = True
 cfg.analysis['plotRaster'] = {'saveFig': True} 			# Plot a raster
-cfg.analysis['plotTraces'] = {'include': [0,1], 'saveFig': True} 			# Plot recorded traces for this list of cells
+cfg.analysis['plotTraces'] = {'include': [0,10], 'saveFig': True} 			# Plot recorded traces for this list of cells
 
 # Variable parameters (used in netParams)
 cfg.synMechTau2 = 5
