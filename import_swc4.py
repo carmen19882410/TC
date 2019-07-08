@@ -27,7 +27,7 @@ if platform.system() == 'Windows':
 #load cell as mycell
 #    def getmorph(self):
 myCell= morphology.Cell()
-morphology.load(filename=os.path.join(wdir,'SWC', 'POm60.CNG.swc'), cell=myCell)
+morphology.load(filename=os.path.join(wdir,'SWC', 'Dexteshe_tc200.CNG.swc'), cell=myCell)
 
 #h.load_file('import3d.hoc')
 #myCell = h.Import3d_SWC_read()
@@ -69,7 +69,7 @@ for sec in secs:
 
 corrD = 1			# no dendritic surface correction
 
-G_pas = 3.79e-5
+G_pas = 6.79e-5         #3.79e-5 original value - check back for cai values!
 E_pas = -73			# to fit current-clamp data (was -71 to -73)
 E_pas = -76.5			# within 3 mV error
 
@@ -103,11 +103,11 @@ class TC_cell():
             sec.cao = 2 
             sec.eca = 120 
             sec.shift_itGHK = -1	# screening charge shift + 3 mV error
-            #sec.gcabar_itGHK = corrD * 0.0002 ##check why this doesnt work!!!!!!!!!!!!!!!
+            sec.pcabar_itGHK = corrD * 0.0002 ##check why this doesnt work!!!!!!!!!!!!!!!
             #sec.qm_itGHK = 2.5   ##check why this doesnt work!!!!!!!!!!!!!!!!!!
             #sec.qh_itGHK = 2.5     ##check why this doesnt work!!!!!!!!!!!!!!
 
-            #insert calcium diffusion
+            #insert calcium diffusion - if I take it out, oscillatory behaviour stays
             sec.insert('cad_cs')		# calcium diffusion everywhere
             sec.depth_cad_cs = 0.1 * corrD
             sec.kt_cad_cs = 0		# no pump
