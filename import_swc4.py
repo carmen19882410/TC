@@ -99,7 +99,7 @@ class TC_cell():
             
             # insert t-type calcium channel
             sec.insert('itGHK')		# T-current everywhere
-            sec.cai = 2.4e-4 
+            sec.cai = 0 
             sec.cao = 2 
             sec.eca = 120 
             sec.shift_itGHK = -1	# screening charge shift + 3 mV error
@@ -113,7 +113,7 @@ class TC_cell():
             sec.kt_cad_cs = 0		# no pump
             sec.kd_cad_cs = 1e-4
             sec.taur_cad_cs = 5
-            sec.cainf_cad_cs = 2.4e-4	
+            sec.cainf_cad_cs = 0	
 	
 	
 
