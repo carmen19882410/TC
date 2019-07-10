@@ -17,9 +17,15 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.popParams['S'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 #netParams.popParams['M'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 
-netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 1, 'cellModel': 'HH'}
+#netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 1, 'cellModel': 'HH'}
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
+
+netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 500, 'number': 50, 'interval': 20}
+#spkTimes = range(0,1000,20)
+#pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.1}
+        #{'start': 400, 'end': 500, 'rate': 1, 'noise': 0.0})]
+
 
 #netParams.popParams['CA_229hoc'] = {'cellType': 'DET', 'numCells': 1, 'cellModel': 'blank'}
 
@@ -29,8 +35,8 @@ netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 
 ## Cell property rules
 ################################################################################################
 
-cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
-cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} , fileName = 'import_swc_TC.py', cellName = 'MakeCell', importSynMechs=False)
+#cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
+cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=False)
 #cellRule = netParams.importCellParams(label = 'CA_229hoc', conds = {'pop': 'CA_229hoc'} , fileName = 'cells/CA_229.hoc', cellName = '', importSynMechs=False)
 
 
@@ -54,10 +60,10 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 #netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':200, 'amp':-0.5} #ms  nA
 #netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
 
-netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
-netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+#netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
+#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 
-#netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 10, 'number': 1, 'start': 500, 'amp': 0.005} # 'noise': 0.1
+#netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500} # 'noise': 0.1
 #netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 #netParams.stimTargetParams['pulse_CN->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'weight': 0.001, 'delay': 100, 'synMech': 'exc'}
 #netParams.stimSourceParams['Input_4'] = {'type': 'NetStim', 'interval': 'uniform(20,100)', 'number': 1000, 'start': 600, 'noise': 0.1}
@@ -78,13 +84,14 @@ netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'i': 0.847, 'tau1': 0.35, 't
 ## Cell connectivity rules
 ################################################################################################
 
-netParams.connParams['CN->TC'] = { 	#  S -> M label
-	'preConds': {'pop': 'CN'}, 	# conditions of presyn cells
+netParams.connParams['artif_CN->TC'] = { 	#  S -> M label
+	'preConds': {'pop': 'artif_CN'}, 	# conditions of presyn cells
 	'postConds': {'pop': 'TC'}, # conditions of postsyn cells
 	'probability': 1, 			# probability of connection
-	'weight': 1,             		# synaptic weight
+	'weight': 0.01,             		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
-	'synMech': 'exc',                   #synaptic mechanism
+	'synMech': 'exc',      #synaptic mechanism
+    'sec': 'dend[30]',
     'loc': [0.4, 0.7],                   #location of synapses that make a connection
     'synsPerConn': 1}                  #number of synapses
 

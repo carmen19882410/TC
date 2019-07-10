@@ -11,6 +11,7 @@ cfg.recordStim = True
 
 
 cfg.recordTraces = {'V_soma':{'sec':'soma_0', 'loc': 0.5, 'var':'v'}}  # Dict with traces to record
+#cfg.recordTraces['I_soma'] = {'sec':'soma_0', 'loc': 0.5, 'var': 'k'}
 cfg.recordTraces['ina'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ina'}
 cfg.recordTraces['ik'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ik'}
 cfg.recordTraces['gna'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'gna'}
