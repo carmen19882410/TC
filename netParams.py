@@ -21,7 +21,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
-netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 10, 'interval': 20, 'noise': 0 }  #'noise': 1'noise': 0.5
+netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 100, 'interval': 10, 'noise': 1 }  #'noise': 1'noise': 0.5
 #spkTimes = range(0,1000,20)
 #pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.1}
         #{'start': 400, 'end': 500, 'rate': 1, 'noise': 0.0})]

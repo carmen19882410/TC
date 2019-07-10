@@ -27,7 +27,7 @@ if platform.system() == 'Windows':
 #load cell as mycell
 #    def getmorph(self):
 myCell= morphology.Cell()
-morphology.load(filename=os.path.join(wdir,'SWC', 'Dexteshe_tc200.CNG.swc'), cell=myCell)
+morphology.load(filename=os.path.join(wdir,'SWC', 'POm60.CNG.swc'), cell=myCell)
 
 #h.load_file('import3d.hoc')
 #myCell = h.Import3d_SWC_read()
@@ -46,6 +46,7 @@ morphology.load(filename=os.path.join(wdir,'SWC', 'Dexteshe_tc200.CNG.swc'), cel
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 morphology.shapeplot(h, ax)
+
 #showSyns: Show synaptic connections in 3D view (True|False)
 
 
