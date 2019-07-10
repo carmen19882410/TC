@@ -21,7 +21,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
-netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 500, 'number': 50, 'interval': 20}
+netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 10, 'interval': 20, 'noise': 0 }  #'noise': 1'noise': 0.5
 #spkTimes = range(0,1000,20)
 #pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.1}
         #{'start': 400, 'end': 500, 'rate': 1, 'noise': 0.0})]
@@ -36,7 +36,8 @@ netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'n
 ################################################################################################
 
 #cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
-cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=False)
+
+cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} , fileName = 'import_swc_TC.py', cellName = 'MakeCell', importSynMechs=True)
 #cellRule = netParams.importCellParams(label = 'CA_229hoc', conds = {'pop': 'CA_229hoc'} , fileName = 'cells/CA_229.hoc', cellName = '', importSynMechs=False)
 
 
@@ -60,8 +61,8 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 #netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':200, 'amp':-0.5} #ms  nA
 #netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
 
-#netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
-#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
+netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 
 #netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500} # 'noise': 0.1
 #netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
@@ -75,7 +76,7 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 ## Synaptic mechanism parameters, most of them get imported from somewhere else
 ################################################################################################
 
-netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'i': 0.847, 'tau1': 0.35, 'tau2': 5, 'e': 0}  # excitatory exponential synaptic mechanism, i = synaptic current in nA, tau1 = rise time, tau2 = decay time, e = synaptic reversal potential
+netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'tau1': 0.35, 'tau2': 5, 'e': 0}  # excitatory exponential synaptic mechanism, i = synaptic current in nA, tau1 = rise time, tau2 = decay time, e = synaptic reversal potential
 #netParams.synMechParams['inh'] = {'mod': 'Exp2Syn', 'tau1': 0.6, 'tau2': 8.5, 'e': -75}  # GABA synaptic mechanism
 
 
@@ -91,8 +92,8 @@ netParams.connParams['artif_CN->TC'] = { 	#  S -> M label
 	'weight': 0.01,             		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
 	'synMech': 'exc',      #synaptic mechanism
-    'sec': 'dend[30]',
-    'loc': [0.4, 0.7],                   #location of synapses that make a connection
+    'sec': 'dend_30',
+    'loc': 0.5,                   #location of synapses that make a connection
     'synsPerConn': 1}                  #number of synapses
 
     

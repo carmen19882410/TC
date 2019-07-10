@@ -46,6 +46,9 @@ morphology.load(filename=os.path.join(wdir,'SWC', 'Dexteshe_tc200.CNG.swc'), cel
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 morphology.shapeplot(h, ax)
+#showSyns: Show synaptic connections in 3D view (True|False)
+
+
            
 #get the sections from the cell
 secs=list(h.allsec());
