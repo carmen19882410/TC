@@ -21,7 +21,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
-netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 1, 'interval': 100, 'noise': 0.5 }  #'noise': 1'noise': 0.5
+netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 10, 'interval': 10, 'noise': 0 }  #'noise': 1'noise': 0.5
 #spkTimes = range(0,1000,20)
 #pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.1}
         #{'start': 400, 'end': 500, 'rate': 1, 'noise': 0.0})]
@@ -76,8 +76,9 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 ## Synaptic mechanism parameters, most of them get imported from somewhere else
 ################################################################################################
 
-netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'tau1': 0.35, 'tau2': 5, 'e': 0}  # excitatory exponential synaptic mechanism, i = synaptic current in nA, tau1 = rise time, tau2 = decay time, e = synaptic reversal potential
+#netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'tau1': 0.35, 'tau2': 5, 'e': 0}  # excitatory exponential synaptic mechanism, i = synaptic current in nA, tau1 = rise time, tau2 = decay time, e = synaptic reversal potential
 #netParams.synMechParams['inh'] = {'mod': 'Exp2Syn', 'tau1': 0.6, 'tau2': 8.5, 'e': -75}  # GABA synaptic mechanism
+netParams.synMechParams['depSyn'] = {'mod': 'Recov2Exp'}  # depressing excitatory exponential synaptic mechanism, i = synaptic current in nA, tau1 = rise time, tau2 = decay time, e = synaptic reversal potential
 
 
 
@@ -89,13 +90,13 @@ netParams.connParams['artif_CN->TC'] = { 	#  S -> M label
 	'preConds': {'pop': 'artif_CN'}, 	# conditions of presyn cells
 	'postConds': {'pop': 'TC'}, # conditions of postsyn cells
 	'probability': 1, 			# probability of connection
-	'weight': 0.001,             		# synaptic weight
+	'weight': 0.01,             		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
-	'synMech': 'exc',      #synaptic mechanism
-     'sec': ['dend_1', 'dend_150', 'dend_100','dend_80', 'dend_61', 'dend_80', 'dend_120', 'dend_20', 'dend_113'],
-     #'sec': 'dend_31',
+	'synMech': 'depSyn',      #synaptic mechanism
+     #'sec': ['dend_1', 'dend_150', 'dend_100','dend_80', 'dend_61', 'dend_80', 'dend_120', 'dend_20', 'dend_113'],
+     'sec': 'dend_31',
      'loc': 0.5,                   #location of synapses that make a connection
-     'synsPerConn': 5}                  #number of synapses
+     'synsPerConn': 1}                  #number of synapses
 
     
 
