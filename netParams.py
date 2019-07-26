@@ -21,7 +21,7 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
-netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 100, 'interval': 10, 'noise': 1 }  #'noise': 1'noise': 0.5
+netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 1, 'interval': 100, 'noise': 0.5 }  #'noise': 1'noise': 0.5
 #spkTimes = range(0,1000,20)
 #pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.1}
         #{'start': 400, 'end': 500, 'rate': 1, 'noise': 0.0})]
@@ -61,8 +61,8 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 #netParams.stimSourceParams['pulse_TC'] = {'type': 'IClamp', 'del':200, 'dur':200, 'amp':-0.5} #ms  nA
 #netParams.stimTargetParams['pulse->TC'] = {'source': 'pulse_TC', 'conds': {'cellType': 'TC_cell'}, 'sec':'soma_0', 'loc':0.5}
 
-netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
-netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+#netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
+#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 
 #netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500} # 'noise': 0.1
 #netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
@@ -82,19 +82,20 @@ netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'tau1': 0.35, 'tau2': 5, 'e'
 
 
 ################################################################################################
-## Cell connectivity rules
+## Cell connectivity rules0
 ################################################################################################
 
 netParams.connParams['artif_CN->TC'] = { 	#  S -> M label
 	'preConds': {'pop': 'artif_CN'}, 	# conditions of presyn cells
 	'postConds': {'pop': 'TC'}, # conditions of postsyn cells
 	'probability': 1, 			# probability of connection
-	'weight': 0.01,             		# synaptic weight
+	'weight': 0.001,             		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
 	'synMech': 'exc',      #synaptic mechanism
-    'sec': 'dend_30',
-    'loc': 0.5,                   #location of synapses that make a connection
-    'synsPerConn': 1}                  #number of synapses
+     'sec': ['dend_1', 'dend_150', 'dend_100','dend_80', 'dend_61', 'dend_80', 'dend_120', 'dend_20', 'dend_113'],
+     #'sec': 'dend_31',
+     'loc': 0.5,                   #location of synapses that make a connection
+     'synsPerConn': 5}                  #number of synapses
 
     
 

@@ -8,10 +8,30 @@ cfg.dt = 0.025 				# Internal integration timestep to use
 cfg.verbose = True  			# Show detailed messages
 cfg.recordStim = True
 
+#cfg.seeds['stim'] = 1234
+# Variable parameters (used in netParams)
+#cfg.synMechTau2 = 5
+#cfg.connWeight = 1
+cfg.hParams.celsius = 34 # change temperature at which sim is made 
+cfg.hParams.v_init = -71.6 # change v init 
+cfg.distributeSynsUniformly = False
+cfg.connRandomSecFromList = False
+
+
 
 cfg.recordCells = ['TC']
+
+#record voltage
 cfg.recordTraces = {'V_soma':{'sec':'soma_0', 'loc': 0.5, 'var':'v'}}  # Dict with traces to record
-cfg.recordTraces['I_syn'] = {'sec':'dend_30', 'loc': 0.5, 'synMech': 'exc', 'var': 'i'} #'synMech': 'Exp2Syn',
+#cfg.recordTraces['V_dend'] = {'sec':'dend_30', 'loc': 0.5, 'var': 'v'} #'synMech': 'Exp2Syn',
+
+#record the synapses
+cfg.recordTraces['I_dend'] = {'synMech': 'exc', 'var': 'i'} #'synMech': 'Exp2Syn',plot for severeal synapses
+#cfg.recordTraces['I_syn'] = {'sec':'dend_31', 'loc': 0.5, 'synMech': 'exc', 'var': 'i'} #'synMech': 'Exp2Syn',
+#cfg.recordTraces['I_syn'] = {'sec': 'dend_130', 'loc': 0.5, 'synMech': 'exc', 'var': 'i'} #'synMech': 'Exp2Syn',
+
+
+#record the individual currents  at soma
 #cfg.recordTraces['ina'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ina'}
 #cfg.recordTraces['ik'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ik'}
 #cfg.recordTraces['gna'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'gna'}
@@ -26,17 +46,10 @@ cfg.filename = 'Carmen_mod_swc'  # Set file output name
 cfg.saveJson = True 	
 cfg.printPopAvgRates = True
 #cfg.analysis['plotRaster'] = { 'include': ['artif_CN'], 'saveFig': True} 			# Plot a raster
-cfg.analysis['plotTraces'] = {'include': [0], 'saveFig': True} 
-
-
-cfg.analysis['plotShape'] = {'includePost': [0], 'includePre': [0], 'showSyns': True, 'synSiz': 30, 'dist': 0.6, 'saveFig': True, 'showFig': True}	
+cfg.analysis['plotTraces'] = {'include': [0,1,2], 'saveFig': True} 
 # Plot recorded traces for this list of cells, for separate figures 'oneFigPer': 'trace'
+cfg.analysis['plotShape'] = {'includePost': [0], 'includePre': [0], 'showSyns': True, 'synSiz': 10, 'dist': 0.6, 'saveFig': True, 'showFig': True}	
+#plot the morphologz of the network
 
 #cfg.analysis['plotConn']
 
-#cfg.seeds['stim'] = 1234
-# Variable parameters (used in netParams)
-#cfg.synMechTau2 = 5
-#cfg.connWeight = 1
-cfg.hParams.celsius = 34 # change temperature at which sim is made 
-cfg.hParams.v_init = -71.6 # change v init 
