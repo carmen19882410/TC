@@ -43,9 +43,9 @@ morphology.load(filename=os.path.join(wdir,'SWC', 'POm60.CNG.swc'), cell=myCell)
 
 
 #plot loaded cell
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-morphology.shapeplot(h, ax)
+#fig = plt.figure()
+#ax = plt.axes(projection='3d')
+#morphology.shapeplot(h, ax)
 
 #showSyns: Show synaptic connections in 3D view (True|False)
 
