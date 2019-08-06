@@ -17,14 +17,18 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.popParams['S'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 #netParams.popParams['M'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 
-#netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 1, 'cellModel': 'HH'}
+netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 2, 'cellModel': 'HH'}
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
-netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 200, 'number': 20, 'interval': 20, 'noise': 0 }  #'noise': 1'noise': 0.5
-#spkTimes = range(0,1000,20)
-#pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.1}
-        #{'start': 400, 'end': 500, 'rate': 1, 'noise': 0.0})]
+
+#spkTimes = range(100,1000,10) + [138, 155, 270]
+#pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.0}
+#        {'start': 400, 'end': 500, 'rate': 10, 'noise': 0.0}]
+
+#netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'VecStim', 'numCells': 1, 'spkTimes': spkTimes, 'pulses': pulses }  #'noise': 1'noise': 0.5
+#netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 100, 'number': 10, 'interval': 20, 'noise': 0 }  #'noise': 1'noise': 0.5
+
 
 
 #netParams.popParams['CA_229hoc'] = {'cellType': 'DET', 'numCells': 1, 'cellModel': 'blank'}
@@ -35,7 +39,7 @@ netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'n
 ## Cell property rules
 ################################################################################################
 
-#cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
+cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
 
 cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} , fileName = 'import_swc_TC.py', cellName = 'MakeCell', importSynMechs=True)
 #cellRule = netParams.importCellParams(label = 'CA_229hoc', conds = {'pop': 'CA_229hoc'} , fileName = 'cells/CA_229.hoc', cellName = '', importSynMechs=False)
@@ -64,8 +68,8 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 #netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
 #netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 
-#netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500} # 'noise': 0.1
-#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500, 'noise': 0.5} # 
+netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 #netParams.stimTargetParams['pulse_CN->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'weight': 0.001, 'delay': 100, 'synMech': 'exc'}
 #netParams.stimSourceParams['Input_4'] = {'type': 'NetStim', 'interval': 'uniform(20,100)', 'number': 1000, 'start': 600, 'noise': 0.1}
 
@@ -78,25 +82,25 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 
 #netParams.synMechParams['exc'] = {'mod': 'Exp2Syn', 'tau1': 0.35, 'tau2': 5, 'e': 0}  # excitatory exponential synaptic mechanism, i = synaptic current in nA, tau1 = rise time, tau2 = decay time, e = synaptic reversal potential
 #netParams.synMechParams['inh'] = {'mod': 'Exp2Syn', 'tau1': 0.6, 'tau2': 8.5, 'e': -75}  # GABA synaptic mechanism
-netParams.synMechParams['depSyn'] = {'mod': 'RecovExp', 'e': 0, 'tau': 0.5, 'k': 0.5, 'tau_rec': 50,'U': 0.5, }  # depressing excitatory exponential synaptic mechanism, from Rudnicki and Hemmert 2017 'High entrainment constrains synaptic depression in a globular bushy cell'
+netParams.synMechParams['depSyn'] = {'mod': 'RecovExp', 'e': 0, 'tau': 1, 'k': 0.5, 'tau_rec': 50,'U': 0.5, }  # depressing excitatory exponential synaptic mechanism, from Rudnicki and Hemmert 2017 'High entrainment constrains synaptic depression in a globular bushy cell'
 
 
 ################################################################################################
 ## Cell connectivity rules0
 ################################################################################################
 
-netParams.connParams['artif_CN->TC'] = { 	#  S -> M label
-	'preConds': {'pop': 'artif_CN'}, 	# conditions of presyn cells
+netParams.connParams['CN->TC'] = { 	#  S -> M label
+	'preConds': {'pop': 'CN'}, 	# conditions of presyn cells
 	'postConds': {'pop': 'TC'}, # conditions of postsyn cells
 	'probability': 1, 			# probability of connection
 	'weight': 0.001,             		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
 	'synMech': 'depSyn',      #synaptic mechanism
-     #'sec': ['dend_1', 'dend_150', 'dend_100','dend_80', 'dend_61', 'dend_80', 'dend_120', 'dend_20', 'dend_113'],
-     'sec': 'dend_31',
+     'sec': 'dend_31', # for several enter dendrites as list
+     #'sec': 'dend',
      'loc': 0.5,                   #location of synapses that make a connection
      'synsPerConn': 1}                  #number of synapses
-
+ 
     
 
 
