@@ -1,53 +1,51 @@
 :  Vector stream of events
 
 NEURON {
-	ARTIFICIAL_CELL VecStim1
-	RANGE delay
+	THREADSAFE
+	ARTIFICIAL_CELL VecStim
+	POINTER ptr
 }
 
 ASSIGNED {
 	index
 	etime (ms)
-	space
-	delay
+	ptr
 }
 
-PARAMETER { 
-	::delay = 0.0
-} 
 
 INITIAL {
 	index = 0
 	element()
 	if (index > 0) {
-		net_send(delay + etime - t, 1)
+		net_send(etime - t, 1)
 	}
 }
 
 NET_RECEIVE (w) {
-
-
 	if (flag == 1) {
 		net_event(t)
 		element()
 		if (index > 0) {
-			net_send(delay + etime - t, 1)
+			net_send(etime - t, 1)
 		}
 	}
 }
 
+DESTRUCTOR {
 VERBATIM
-extern double* vector_vec();
-extern int vector_capacity();
-extern void* vector_arg();
+	void* vv = (void*)(_p_ptr);  
+        if (vv) {
+		hoc_obj_unref(*vector_pobj(vv));
+	}
 ENDVERBATIM
+}
 
 PROCEDURE element() {
 VERBATIM	
   { void* vv; int i, size; double* px;
 	i = (int)index;
 	if (i >= 0) {
-		vv = *((void**)(&space));
+		vv = (void*)(_p_ptr);
 		if (vv) {
 			size = vector_capacity(vv);
 			px = vector_vec(vv);
@@ -67,19 +65,16 @@ ENDVERBATIM
 
 PROCEDURE play() {
 VERBATIM
-	void** vv;
-	vv = (void**)(&space);
-	*vv = (void*)0;
+	void** pv;
+	void* ptmp = NULL;
 	if (ifarg(1)) {
-		*vv = vector_arg(1);
+		ptmp = vector_arg(1);
+		hoc_obj_ref(*vector_pobj(ptmp));
 	}
+	pv = (void**)(&_p_ptr);
+	if (*pv) {
+		hoc_obj_unref(*vector_pobj(*pv));
+	}
+	*pv = ptmp;
 ENDVERBATIM
 }
-        
-
-
-
-
-
-
-

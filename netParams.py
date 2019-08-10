@@ -17,16 +17,16 @@ netParams = specs.NetParams()  # object of class NetParams to store the network 
 #netParams.popParams['S'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 #netParams.popParams['M'] = {'cellType': 'PYR', 'numCells': 20, 'cellModel': 'HH'}
 
-netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 2, 'cellModel': 'HH'}
+#netParams.popParams['CN'] = {'cellType': 'CN', 'numCells': 1, 'cellModel': 'HH'}
 #netParams.defaultThreshold = -10.0
 netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 'HH'}
 
 
-#spkTimes = range(100,1000,10) + [138, 155, 270]
+spkTimes = [500, 520, 540, 560, 580, 600, 620, 640, 660, 680, 700, 720, 740, 760, 780, 800, 900]
 #pulses = {'start': 100, 'end': 1000, 'rate': 10, 'noise': 0.0}
 #        {'start': 400, 'end': 500, 'rate': 10, 'noise': 0.0}]
 
-#netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'VecStim', 'numCells': 1, 'spkTimes': spkTimes, 'pulses': pulses }  #'noise': 1'noise': 0.5
+netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'VecStim', 'numCells': 5, 'spkTimes': spkTimes}  #'noise': 1'noise': 0.5
 #netParams.popParams['artif_CN'] = {'pop': 'artif_CN', 'cellModel': 'NetStim', 'numCells': 1, 'start': 100, 'number': 10, 'interval': 20, 'noise': 0 }  #'noise': 1'noise': 0.5
 
 
@@ -39,7 +39,7 @@ netParams.popParams['TC'] = {'cellType': 'TC_cell', 'numCells': 1, 'cellModel': 
 ## Cell property rules
 ################################################################################################
 
-cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
+#cellRule = netParams.importCellParams(label = 'CN', conds = {'pop': 'CN'} , fileName = 'import_swc_CN.py', cellName = 'MakeCell', importSynMechs=True)
 
 cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} , fileName = 'import_swc_TC.py', cellName = 'MakeCell', importSynMechs=True)
 #cellRule = netParams.importCellParams(label = 'CA_229hoc', conds = {'pop': 'CA_229hoc'} , fileName = 'cells/CA_229.hoc', cellName = '', importSynMechs=False)
@@ -68,8 +68,11 @@ cellRule = netParams.importCellParams(label = 'TC_cell', conds = {'pop': 'TC'} ,
 #netParams.stimSourceParams['pulse_CN_IClamp'] = {'type': 'IClamp', 'del':1000, 'dur':3, 'amp':5} #ms  nA
 #netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN_IClamp', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 
-netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500, 'noise': 0.5} # 
-netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
+#spkTimes = [138, 155, 270]
+#netParams.stimSourceParams['pulse_CN'] = {'type': 'NetStim', 'interval': 20, 'number': 50, 'start': 500, 'noise': 0.5} # 
+#netParams.stimSourceParams['pulse_CN'] = {'type': 'VecStim', 'SpkTime': spkTimes} # 
+
+#netParams.stimTargetParams['pulse->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'sec':'soma_0', 'loc':0.5}
 #netParams.stimTargetParams['pulse_CN->CN'] = {'source': 'pulse_CN', 'conds': {'cellType': 'CN'}, 'weight': 0.001, 'delay': 100, 'synMech': 'exc'}
 #netParams.stimSourceParams['Input_4'] = {'type': 'NetStim', 'interval': 'uniform(20,100)', 'number': 1000, 'start': 600, 'noise': 0.1}
 
@@ -90,16 +93,16 @@ netParams.synMechParams['depSyn'] = {'mod': 'RecovExp', 'e': 0, 'tau': 1, 'k': 0
 ################################################################################################
 
 netParams.connParams['CN->TC'] = { 	#  S -> M label
-	'preConds': {'pop': 'CN'}, 	# conditions of presyn cells
+	'preConds': {'pop': 'artif_CN'}, 	# conditions of presyn cells
 	'postConds': {'pop': 'TC'}, # conditions of postsyn cells
 	'probability': 1, 			# probability of connection
-	'weight': 0.001,             		# synaptic weight
+	'weight': 0.01,             		# synaptic weight
 	'delay': 0,						# transmission delay (ms)
 	'synMech': 'depSyn',      #synaptic mechanism
-     'sec': 'dend_31', # for several enter dendrites as list
-     #'sec': 'dend',
+     'sec': ['dend_1', 'dend_100', 'dend_50'],# for several enter dendrites, each section is plotted 
+     #'sec': 'dend'
      'loc': 0.5,                   #location of synapses that make a connection
-     'synsPerConn': 1}                  #number of synapses
+     'synsPerConn': 4}                  #number of synapses
  
     
 
