@@ -3,7 +3,7 @@ from netpyne import specs
 # Simulation options
 cfg = specs.SimConfig()		# object of class SimConfig to store simulation configuration
 
-cfg.duration = 1500 			# Duration of the simulation, in ms
+cfg.duration = 2500 			# Duration of the simulation, in ms
 cfg.dt = 0.025 				# Internal integration timestep to use
 cfg.verbose = True  			# Show detailed messages
 cfg.recordStim = True
@@ -31,7 +31,6 @@ cfg.recordTraces['I_dend'] = {'synMech': 'depSyn', 'var': 'i'} #'synMech': 'Exp2
 #cfg.recordTraces['I_syn'] = {'sec': 'dend_130', 'loc': 0.5, 'synMech': 'exc', 'var': 'i'} #'synMech': 'Exp2Syn',
 #cfg.recordTraces['I_syn'] = {'sec':'dend_31', 'loc': 0.5, 'synMech': 'depSyn', 'var': 'i'} #'synMech': 'Exp2Syn',
 
-
 #record the individual currents  at soma
 #cfg.recordTraces['ina'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ina'}
 #cfg.recordTraces['ik'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'hh2', 'var': 'ik'}
@@ -40,17 +39,23 @@ cfg.recordTraces['I_dend'] = {'synMech': 'depSyn', 'var': 'i'} #'synMech': 'Exp2
 #cfg.recordTraces['ica'] = {'sec':'soma_0', 'loc': 0.5, 'mech': 'itGHK', 'var': 'ica'}
 #cfg.recordTraces['cai'] = {'sec':'soma_0', 'loc': 0.5, 'var': 'cai'} #plots the internal calcium diffusion of the cell, not of the conductances defined in the mod. file
 
-
+cfg.recordSpikesGids = [0,1]
 
 cfg.recordStep = 0.1 			# Step size in ms to save data (eg. V traces, LFP, etc)
 cfg.filename = 'Carmen_mod_swc'  # Set file output name
 cfg.saveJson = True 	
 cfg.printPopAvgRates = True
 #cfg.analysis['plotRaster'] = { 'include': ['artif_CN'], 'saveFig': True} 			# Plot a raster
-cfg.analysis['plotTraces'] = {'include': [0,1,2], 'saveFig': True} 
+cfg.analysis['plotTraces'] = {'include': [0], 'saveFig': True} 
 # Plot recorded traces for this list of cells, for separate figures 'oneFigPer': 'trace'
 cfg.analysis['plotShape'] = {'includePost': [0], 'includePre': [0], 'showSyns': True, 'synSiz': 10, 'dist': 0.6, 'saveFig': True, 'showFig': True}	
 #plot the morphologz of the network
 
-#cfg.analysis['plotConn']
+#plot Rasterplot
+cfg.analysis['plotRaster'] = True
 
+cfg.analysis['plotRaster'] = {'orderBy': 'y', 'orderInverse': True} 
+#cfg.analysis['plotRaster'] = {'include': [('TC',0), ('artif_CN', 0)],  'saveFig': 'raster.png', 'showFig': True}
+
+cfg.analysis['plot2Dnet'] = True           # plot 2D visualization of cell positions and connections
+cfg.analysis['plotConn'] = True           # plot connectivity matrix
