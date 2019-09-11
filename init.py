@@ -37,7 +37,7 @@ sim.createSimulateAnalyze(netParams=netParams, simConfig=simConfig)
 #stimt = []
 #for i, spikes in enumerate(spkt):
 #    if spkid[i]==1:
-#        stimt.append(spikes)
+#        stimt.append(spikes)f
 
 #_, ax = plt.subplots()
 #ax.plot(stimt, np.ones(stimt.size), '|')

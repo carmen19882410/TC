@@ -3,7 +3,7 @@ from netpyne import specs
 # Simulation options
 cfg = specs.SimConfig()		# object of class SimConfig to store simulation configuration
 
-cfg.duration = 2500 			# Duration of the simulation, in ms
+cfg.duration = 5000			# Duration of the simulation, in ms
 cfg.dt = 0.025 				# Internal integration timestep to use
 cfg.verbose = True  			# Show detailed messages
 cfg.recordStim = True
@@ -13,9 +13,9 @@ cfg.recordStim = True
 #cfg.synMechTau2 = 5
 #cfg.connWeight = 1
 cfg.hParams.celsius = 34 # change temperature at which sim is made 
-cfg.hParams.v_init = -74                #-71.6 # change v init 
-cfg.distributeSynsUniformly = False
-cfg.connRandomSecFromList = False
+cfg.hParams.v_init = -73                #-71.6 # change v init 
+cfg.distributeSynsUniformly = True
+cfg.connRandomSecFromList = True
 
 
 
@@ -46,15 +46,18 @@ cfg.filename = 'Carmen_mod_swc'  # Set file output name
 cfg.saveJson = True 	
 cfg.printPopAvgRates = True
 #cfg.analysis['plotRaster'] = { 'include': ['artif_CN'], 'saveFig': True} 			# Plot a raster
-cfg.analysis['plotTraces'] = {'include': [0], 'saveFig': True} 
+#cfg.analysis['plotTraces'] = {'include': [0], 'saveFig': True} 
+cfg.analysis['plotTraces'] = {'include': [('TC',0)], 'saveFig': True}
+
 # Plot recorded traces for this list of cells, for separate figures 'oneFigPer': 'trace'
-cfg.analysis['plotShape'] = {'includePost': [0], 'includePre': [0], 'showSyns': True, 'synSiz': 10, 'dist': 0.6, 'saveFig': True, 'showFig': True}	
+#cfg.analysis['plotShape'] = {'includePost': [0], 'includePre': [('artif_CN',0), ('artif_CN', 1)], 'showSyns': True, 'synSiz': 10, 'dist': 1, 'includeAxon': True, 'saveFig': True, 'showFig': True}	
+cfg.analysis['plotShape'] = {'includePost': [0], 'includePre': ['all'], 'showSyns': True, 'synSiz': 5, 'dist': 1, 'includeAxon': True, 'saveFig': True, 'showFig': True}	
+
 #plot the morphologz of the network
 
 #plot Rasterplot
 cfg.analysis['plotRaster'] = True
-
-cfg.analysis['plotRaster'] = {'orderBy': 'y', 'orderInverse': True} 
+cfg.analysis['plotRaster'] = {'orderBy': 'y', 'orderInverse': False, 'saveFig': True} 
 #cfg.analysis['plotRaster'] = {'include': [('TC',0), ('artif_CN', 0)],  'saveFig': 'raster.png', 'showFig': True}
 
 cfg.analysis['plot2Dnet'] = True           # plot 2D visualization of cell positions and connections
